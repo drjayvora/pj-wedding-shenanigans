@@ -7,9 +7,12 @@
 export const CONFIG = {
   firebase: {
     // ⬇ Paste these three values from Firebase → Project settings → Your apps → pj-wedding-web
-    apiKey: "YOUR_API_KEY",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID",
+    apiKey: "AIzaSyCNz-qprNCRMRMtKdPylg8ezAZekZRlc9Q",
+  authDomain: "pj-wedding-shenanigans.firebaseapp.com",
+  projectId: "pj-wedding-shenanigans",
+  storageBucket: "pj-wedding-shenanigans.firebasestorage.app",
+  messagingSenderId: "13410722420",
+  appId: "1:13410722420:web:ecdfd89ae6cc4057c46721"
     // ⬇ Already filled in
     authDomain: "pj-wedding-shenanigans.firebaseapp.com",
     projectId: "pj-wedding-shenanigans",
