@@ -55,6 +55,17 @@
   <dialog id="sheet" class="sheet"></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=3"></script>
+  <script>
+    // If the app hasn't started after 8s (stale cache or a broken config), show a way out instead of a blank page.
+    setTimeout(function () {
+      if (document.getElementById('app').hidden && document.getElementById('gate').hidden) {
+        var g = document.getElementById('gate'); g.hidden = false;
+        document.getElementById('gate-msg').textContent = "Couldn't load the latest version. Tap below to refresh.";
+        var b = g.querySelector('[data-action="sign-in"]'); b.textContent = 'Refresh';
+        b.onclick = function () { location.replace(location.pathname + '?r=' + Date.now()); };
+      }
+    }, 8000);
+  </script>
 </body>
 </html>
