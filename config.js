@@ -6,12 +6,14 @@
 // ─────────────────────────────────────────────────────────────
 export const CONFIG = {
   firebase: {
+    // ⬇ Paste these three values from Firebase → Project settings → Your apps → pj-wedding-web
     apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "",
-    appId: ""
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID",
+    // ⬇ Already filled in
+    authDomain: "pj-wedding-shenanigans.firebaseapp.com",
+    projectId: "pj-wedding-shenanigans",
+    storageBucket: "pj-wedding-shenanigans.firebasestorage.app"
   },
 
   // All data lives under weddings/{weddingId}/… in Firestore
@@ -19,8 +21,7 @@ export const CONFIG = {
 
   // Who may sign in (lower-case). Empty array = any signed-in Google user (not recommended).
   allowedEmails: [
-    // "jay@example.com",
-    // "priyal@example.com"
+    "jhv2508@gmail.com"
   ],
 
   sides: {
