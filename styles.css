@@ -22,16 +22,16 @@
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; background: #FBF5EC; }
 body {
   margin: 0; font-family: var(--sans); color: var(--ink); background: var(--bg);
   background-image:
     radial-gradient(1200px 500px at 110% -10%, rgba(217, 154, 43, .14), transparent 60%),
     radial-gradient(900px 500px at -20% 0%, rgba(194, 87, 58, .10), transparent 60%);
-  background-attachment: fixed; min-height: 100dvh; font-size: 15px; line-height: 1.45;
+  min-height: 100dvh; font-size: 15px; line-height: 1.45;
 }
 button, input, select, textarea { font: inherit; color: inherit; }
-button { cursor: pointer; border: 0; background: none; padding: 0; }
+button { cursor: pointer; border: 0; background: none; padding: 0; -webkit-appearance: none; appearance: none; }
 [hidden] { display: none !important; }
 svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -55,7 +55,7 @@ svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width:
 
 /* layout */
 .app { max-width: 640px; margin: 0 auto; padding: 0 16px calc(110px + var(--safe-b)); }
-.top { display: flex; align-items: center; justify-content: space-between; padding: max(18px, env(safe-area-inset-top)) 2px 14px; position: sticky; top: 0; z-index: 5; background: linear-gradient(var(--bg) 70%, transparent); }
+.top { display: flex; align-items: center; justify-content: space-between; padding: max(16px, env(safe-area-inset-top)) 2px 12px; }
 .brand { display: flex; align-items: center; gap: 12px; }
 .eyebrow { margin: 0; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 .title { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 24px; line-height: 1.05; color: var(--terra-d); font-style: italic; }
@@ -205,8 +205,8 @@ svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width:
 .nav-btn { display: grid; justify-items: center; gap: 2px; color: #BFAEA5; font-size: 10.5px; font-weight: 600; padding: 6px 0; border-radius: 16px; }
 .nav-btn.on { color: #FFE9D6; }
 .nav-btn.on svg { stroke: var(--gold); }
-.nav-fab { justify-self: center; width: 54px; height: 54px; border-radius: 18px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--terra), var(--gold)); box-shadow: 0 8px 18px -6px rgba(217, 154, 43, .7); margin-top: -26px; border: 4px solid var(--bg); }
-.nav-fab svg { width: 26px; height: 26px; stroke-width: 2.4; }
+.nav-fab { justify-self: center; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: #fff; background-color: var(--terra); background-image: linear-gradient(135deg, #C2573A, #D99A2B); box-shadow: 0 6px 16px -4px rgba(217, 154, 43, .65), inset 0 1px 0 rgba(255,255,255,.25); }
+.nav-fab svg { width: 24px; height: 24px; stroke-width: 2.6; color: #fff; }
 .nav-fab:active { transform: scale(.94); }
 
 /* sheet */
@@ -252,9 +252,23 @@ svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width:
 
 /* responsive */
 @media (max-width: 480px) {
-  .stats { grid-template-columns: 1fr 1fr; }
-  .grid2 { grid-template-columns: 1fr; }
-  .hero-amt { font-size: 40px; }
+  .app { padding-inline: 14px; }
+  .view { gap: 12px; }
+  .hero { padding: 20px 18px 18px; border-radius: 22px; }
+  .hero-big { font-size: 24px; }
+  .hero-amt { font-size: 38px; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat { padding: 9px 12px; border-radius: 14px; }
+  .stat span { font-size: 10px; }
+  .stat strong { font-size: 15px; }
+  .grid2 { gap: 8px; }
+  .card { padding: 14px; border-radius: 18px; }
+  .fam { gap: 8px; }
+  .fam h3 { font-size: 15px; }
+  .fam dt { font-size: 12px; } .fam dd { font-size: 13.5px; }
+  .chip { font-size: 11px; padding: 4px 8px; }
+  .title { font-size: 22px; }
+  .monogram.sm { width: 42px; height: 42px; font-size: 15px; }
 }
 @media (min-width: 700px) {
   .sheet { margin: auto; }
