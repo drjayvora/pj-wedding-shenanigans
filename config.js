@@ -12,7 +12,7 @@ export const CONFIG = {
   projectId: "pj-wedding-shenanigans",
   storageBucket: "pj-wedding-shenanigans.firebasestorage.app",
   messagingSenderId: "13410722420",
-  appId: "1:13410722420:web:ecdfd89ae6cc4057c46721"
+  appId: "1:13410722420:web:ecdfd89ae6cc4057c46721",
     // ⬇ Already filled in
     authDomain: "pj-wedding-shenanigans.firebaseapp.com",
     projectId: "pj-wedding-shenanigans",
