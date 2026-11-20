@@ -1,0 +1,13 @@
+{
+  "name": "The P&J Wedding Shenanigans",
+  "short_name": "P&J",
+  "description": "Shared wedding expenses for both families.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FBF5EC",
+  "theme_color": "#FBF5EC",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

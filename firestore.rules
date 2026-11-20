@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Only these Google accounts can read or write the ledger. Keep in sync with config.js → allowedEmails.
+    function isFamily() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.lower() in [
+          'jay@example.com',
+          'priyal@example.com'
+        ];
+    }
+
+    match /weddings/{weddingId}/{collection}/{docId} {
+      allow read, write: if isFamily()
+        && collection in ['people', 'expenses', 'payments'];
+    }
+  }
+}
