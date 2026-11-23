@@ -24,7 +24,7 @@ export const CONFIG = {
 
   // Who may sign in (lower-case). Empty array = any signed-in Google user (not recommended).
   allowedEmails: [
-    "jhv2508@gmail.com"
+    "jhv2508@gmail.com", "priyalparekh2000@gmail.com"
   ],
 
   sides: {
