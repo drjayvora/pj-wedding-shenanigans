@@ -1,18 +1,16 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Only these Google accounts can read or write the ledger. Keep in sync with config.js → allowedEmails.
-    function isFamily() {
-      return request.auth != null
-        && request.auth.token.email_verified == true
-        && request.auth.token.email.lower() in [
-          'jhv2508@gmail.com'
-        ];
-    }
+    function email() { return request.auth.token.email.lower(); }
+    function signedIn() { return request.auth != null && request.auth.token.email_verified == true; }
+    // Can see the ledger (keep in sync with config.js → allowedEmails)
+    function isFamily() { return signedIn() && email() in ['jhv2508@gmail.com', 'priyalparekh2000@gmail.com']; }
+    // Can add, edit and delete (keep in sync with config.js → editors)
+    function isEditor() { return signedIn() && email() in ['jhv2508@gmail.com']; }
 
     match /weddings/{weddingId}/{collection}/{docId} {
-      allow read, write: if isFamily()
-        && collection in ['people', 'expenses', 'payments'];
+      allow read: if isFamily() && collection in ['people', 'expenses', 'payments'];
+      allow write: if isEditor() && collection in ['people', 'expenses', 'payments'];
     }
   }
 }

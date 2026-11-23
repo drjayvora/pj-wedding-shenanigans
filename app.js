@@ -1,4 +1,4 @@
-import { CONFIG } from './config.js?v=4';
+import { CONFIG } from './config.js?v=5';
 
 /* ───────────── helpers ───────────── */
 const $ = (s, r = document) => r.querySelector(s);
@@ -14,7 +14,7 @@ const splitLabel = e => e.split === 'common' ? `Shared ${e.ratio ?? 50}:${100 - 
 
 const state = {
   store: null, user: null, people: [], expenses: [], payments: [],
-  view: 'overview', settleMode: 'family', filter: { q: '', fn: 'all', split: 'all' }, seeded: false
+  view: 'overview', canEdit: true, settleMode: 'family', filter: { q: '', fn: 'all', split: 'all' }, seeded: false
 };
 
 /* ───────────── data stores ───────────── */
@@ -361,6 +361,7 @@ sheet.addEventListener('submit', async ev => {
 });
 
 /* ───────────── actions ───────────── */
+const EDIT_ACTIONS = new Set(['add-exp','edit-exp','del-exp','add-pay','record','edit-pay','del-pay','add-person','edit-person','del-person']);
 async function confirmDel(col, id, msg) {
   if (!confirm(msg)) return;
   try { await state.store.remove(col, id); closeSheet(); toast('Deleted'); } catch (e) { toast(e.message, true); }
@@ -385,6 +386,7 @@ document.addEventListener('click', e => {
   const t = e.target.closest('[data-view],[data-action]'); if (!t) return;
   if (t.dataset.view) { state.view = t.dataset.view; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   const a = t.dataset.action, id = t.dataset.id || sheet.querySelector('form')?.dataset.id;
+  if (!state.canEdit && EDIT_ACTIONS.has(a)) return toast('You have view-only access 👀');
   const find = (arr, i) => arr.find(x => x.id === i);
   switch (a) {
     case 'sign-in': state.store.signIn().catch(err => toast(err.message, true)); break;
@@ -429,7 +431,7 @@ function startData() {
   for (const n of ['people', 'expenses', 'payments']) {
     unsubs.push(state.store.subscribe(n, rows => {
       state[n] = n === 'people' ? rows.sort((a, b) => (b.head ? 1 : 0) - (a.head ? 1 : 0) || (a.name || '').localeCompare(b.name || '')) : rows;
-      if (n === 'people' && !rows.length && !state.seeded) {
+      if (n === 'people' && !rows.length && !state.seeded && state.canEdit) {
         state.seeded = true;
         CONFIG.people.forEach(({ id, ...p }) => state.store.set('people', id, p));
       }
@@ -456,6 +458,10 @@ function showGate(msg, wrongUser) {
     const allow = (CONFIG.allowedEmails || []).map(s => s.toLowerCase());
     if (state.store.mode === 'cloud' && allow.length && !allow.includes((user.email || '').toLowerCase()))
       return showGate(`${user.email} isn't on the guest list for this ledger.`, true);
+    const editors = (CONFIG.editors || []).map(s => s.toLowerCase());
+    state.canEdit = state.store.mode !== 'cloud' || !editors.length || editors.includes((user.email || '').toLowerCase());
+    document.body.classList.toggle('readonly', !state.canEdit);
+    if (!state.canEdit) { $('#mode-pill').textContent = 'View only'; }
     $('#gate').hidden = true; $('#app').hidden = false;
     startData();
   });

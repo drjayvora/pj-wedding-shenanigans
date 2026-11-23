@@ -281,3 +281,9 @@ svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width:
 .f input[type=date] { display: block; }
 .amt input::-webkit-outer-spin-button, .amt input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .amt input { -moz-appearance: textfield; }
+
+/* view-only mode */
+body.readonly .nav-fab, body.readonly [data-action="record"], body.readonly [data-action="add-pay"], body.readonly [data-action="add-person"] { display: none !important; }
+body.readonly .nav { grid-template-columns: repeat(4, 1fr); }
+body.readonly .exp, body.readonly .person { cursor: default; }
+body.readonly .chev { visibility: hidden; }
