@@ -26,6 +26,7 @@ export const CONFIG = {
   allowedEmails: [
     "jhv2508@gmail.com", "priyalparekh2000@gmail.com"
   ],
+  editors: ["jhv2508@gmail.com"], // can add/edit; everyone else on allowedEmails is view-only
 
   sides: {
     V: { name: "Vora family", short: "Vora" },
